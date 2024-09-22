@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(cuid())
+  username         String   @unique
+  fullname         String
+  password         String
+  gender           Gender
+  profilePic       String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  conversationsIds String[] //This is a list of Strings that store the IDs of conversations the user is part of.
+
+  conversations Conversation[] //Represents the conversations that the user is involved in. It links to the Conversation Model.
+  messages      Message[] //Represents all the messages that this user has sent. It links to the Message model.
+}
+
+enum Gender {
+  male
+  female
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participantIds String[] //A list of strings containing the IDs of the users who are part of the conversation.
+  participants   User[] //A list of User objects representing the actual participants in the conversation.
+
+  messageIds String[] // A list of strings containing the IDs of messages sent in the conversation.
+  messages   Message[] // A list of Message objects representing all the messages sent in the conversation.
+}
+
+model Message {
+  id String @id @default(cuid())
+
+  conversationId String //The ID of the conversation this message belongs to. It creates a relationship between the message and the conversation.
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id])
+
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
