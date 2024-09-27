@@ -1,10 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+
 function App() {
   return (
-    <>
-      <div className="text-red-500 text-2xl">Hello</div>
-      <button className="btn btn-primary">my button</button>
-      <button className="btn btn-secondary">my button</button>
-    </>
+    <div className="p-4 h-screen flex items-center justify-center">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </div>
   );
 }
 
