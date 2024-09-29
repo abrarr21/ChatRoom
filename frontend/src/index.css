@@ -9,3 +9,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.label-text {
+  color: white;
+}
