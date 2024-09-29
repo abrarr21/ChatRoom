@@ -5,7 +5,7 @@ const LogoutButton = () => {
     alert("You are logged out");
   };
   return (
-    <div className="mt-auto">
+    <div className="mt-20">
       <LogOut className="w-6 h-6 text-white cursor-pointer" onClick={logout} />
     </div>
   );
