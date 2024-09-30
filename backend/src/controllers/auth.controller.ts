@@ -11,7 +11,7 @@ const signupSchema = z
     password: z.string().min(6, "Password must be at least 6 characters long"),
     confirmPassword: z.string(),
     gender: z.enum(["male", "female"]),
-    profilePic: z.string().optional(),
+    // profilePic: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password don't match",
@@ -38,6 +38,9 @@ export const signup = async (req: Request, res: Response) => {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(parsedData.password, salt);
 
+    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${parsedData.username}`;
+    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${parsedData.username}`;
+
     //Create new user
     const newUser = await prisma.user.create({
       data: {
@@ -45,7 +48,8 @@ export const signup = async (req: Request, res: Response) => {
         fullname: parsedData.fullname,
         password: hashedPassword,
         gender: parsedData.gender,
-        profilePic: parsedData.profilePic || "",
+        profilePic:
+          parsedData.gender === "male" ? boyProfilePic : girlProfilePic,
       },
     });
 
