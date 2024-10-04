@@ -15,7 +15,7 @@ const signupSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password don't match",
-    path: ["ConfirmPassword"],
+    path: ["confirmPassword"],
   });
 
 export const signup = async (req: Request, res: Response) => {
@@ -103,7 +103,7 @@ export const login = async (req: Request, res: Response) => {
     );
 
     if (!isPasswordCorrect) {
-      res.status(400).json({ error: "Invalid Credentials" });
+      return res.status(400).json({ error: "Invalid Credentials" });
     }
 
     //Generate token and send cookie to the client
