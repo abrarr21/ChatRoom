@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec node --loader ts-node/esm backend/src/server.ts"
+    "dev": "nodemon --exec node --loader ts-node/esm backend/src/server.ts",
+    "build": "tsc && pnpm install && prisma generate --schema=./backend/prisma/schema.prisma && pnpm install --prefix frontend && pnpm --prefix frontend run build",
+    "start": "node backend/dist/src/server.js"
   },
   "type": "module",
   "keywords": [],
