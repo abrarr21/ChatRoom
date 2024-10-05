@@ -1,4 +1,3 @@
-import { DUMMY_CONVERSATIONS } from "../../dummydata/dummy";
 import useGetConversations from "../../hooks/useGetConversation";
 import Conversation from "./Conversation";
 

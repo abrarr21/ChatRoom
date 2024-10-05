@@ -3,10 +3,10 @@ import { useSocketContext } from "../../context/SocketContext";
 
 const Conversation = ({
   conversation,
-  emoji,
+  // emoji,
 }: {
   conversation: ConversationType;
-  emoji: string;
+  // emoji: string;
 }) => {
   const { setSelectedConversation, selectedConversation } = useConversation();
   const isSelected = selectedConversation?.id === conversation.id;
@@ -32,7 +32,7 @@ const Conversation = ({
             <p className="font-bold text-gray-200 text-sm md:text-md">
               {conversation.fullname}
             </p>
-            <span className="text-xl hidden md:inline-block">{emoji}</span>
+            {/* <span className="text-xl hidden md:inline-block">{emoji}</span> */}
           </div>
         </div>
       </div>
