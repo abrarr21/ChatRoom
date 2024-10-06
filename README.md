@@ -55,7 +55,7 @@ A real-time chat application that allows user to send and receive messages insta
    Run the Prisma migrations to set up the PostgreSQL database:
 
    ```bash
-   pnpm prisma migrate dev
+   pnpm prisma generate --schema=./backend/prisma/schema.prisma
    ```
 
 5. **Start the backend server**:
@@ -85,16 +85,17 @@ chatroom/
 │
 ├── backend/            # Express server with Socket.io
 │   ├── src/
-│   ├── prisma/
-│   ├── .env
+│   ├── prisma/│
 │   └── package.json
 │
 ├── frontend/           # React frontend
 │   ├── src/
 │   └── package.json
 │
+|── .env
 ├── README.md           # This file
 └── package.json        # Root package.json
+└── tsconfig.json
 
 
 
